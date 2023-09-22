@@ -257,7 +257,7 @@ int main(){
     }
 
 	//------------------------------------------------------Time------------------------------------------------------------
-	//------------------------------------------------------10------------------------------------------------------------
+	//------------------------------------------------------10 milliseconds------------------------------------------------------------
 
 	auto duration_bubble_10 = std::chrono::duration_cast<std::chrono::milliseconds>(end_time_bubble_10 - start_time_bubble_10);
 	std::cout << "\n\nTime taken for sorting bubble 10: " << duration_bubble_10.count() << " milliseconds" << std::endl;
@@ -268,7 +268,7 @@ int main(){
 	auto duration_selection_10 = std::chrono::duration_cast<std::chrono::milliseconds>(end_time_selection_10 - start_time_selection_10);
 	std::cout << "\nTime taken for sorting selection 10: " << duration_selection_10.count() << " milliseconds" << std::endl;
 
-	//------------------------------------------------------100------------------------------------------------------------
+	//------------------------------------------------------100 milliseconds------------------------------------------------------------
 
 	auto duration_bubble_100 = std::chrono::duration_cast<std::chrono::milliseconds>(end_time_bubble_100 - start_time_bubble_100);
 	std::cout << "\n\nTime taken for sorting bubble 100: " << duration_bubble_100.count() << " milliseconds" << std::endl;
@@ -278,7 +278,8 @@ int main(){
 
 	auto duration_selection_100 = std::chrono::duration_cast<std::chrono::milliseconds>(end_time_selection_100 - start_time_selection_100);
 	std::cout << "\nTime taken for sorting selection 100: " << duration_selection_100.count() << " milliseconds" << std::endl;
-	//------------------------------------------------------1000------------------------------------------------------------
+
+	//------------------------------------------------------1000 milliseconds------------------------------------------------------------
 
 	auto duration_bubble_1000 = std::chrono::duration_cast<std::chrono::milliseconds>(end_time_bubble_1000 - start_time_bubble_1000);
 	std::cout << "\n\nTime taken for sorting bubble 1000: " << duration_bubble_1000.count() << " milliseconds" << std::endl;
@@ -288,7 +289,8 @@ int main(){
 
 	auto duration_selection_1000 = std::chrono::duration_cast<std::chrono::milliseconds>(end_time_selection_1000 - start_time_selection_1000);
 	std::cout << "\nTime taken for sorting selection 1000: " << duration_selection_1000.count() << " milliseconds" << std::endl;
-	//------------------------------------------------------10000------------------------------------------------------------
+
+	//------------------------------------------------------10000 milliseconds------------------------------------------------------------
 
 	auto duration_bubble_10000 = std::chrono::duration_cast<std::chrono::milliseconds>(end_time_bubble_10000 - start_time_bubble_10000);
 	std::cout << "\n\nTime taken for sorting bubble 10000: " << duration_bubble_10000.count() << " milliseconds" << std::endl;
@@ -357,3 +359,5 @@ void selectionSort(int arr[], int n)
         arr[minIndex] = temp;
     }
 }
+
+
