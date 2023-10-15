@@ -5,8 +5,10 @@ class Sorting
 	
 };
 
-void bubbleSort(int arr[], int n);
+void bubbleSort(std::vector<int> &arr, int n, int i = 0);
 
-void insertionSort(int arr[], int n);
+void insertionSort(std::vector<int> &arr, int n, int i = 1);
 
-void selectionSort(int arr[], int n);
+void selectionSort(std::vector<int> &arr, int n);
+
+void swap(int &a, int &b);
