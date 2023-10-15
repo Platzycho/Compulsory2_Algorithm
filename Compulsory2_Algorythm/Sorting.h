@@ -5,10 +5,12 @@ class Sorting
 	
 };
 
-void bubbleSort(std::vector<int> &arr, int n, int i = 0);
+void mergeSort(std::vector<int>& arr, int left, int right);
 
-void insertionSort(std::vector<int> &arr, int n, int i = 1);
+void quickSort(std::vector<int>& arr, int low, int high);
 
 void selectionSort(std::vector<int> &arr, int n);
 
-void swap(int &a, int &b);
+void merge(std::vector<int>& arr, int left, int mid, int right);
+
+int partition(std::vector<int>& arr, int low, int high);

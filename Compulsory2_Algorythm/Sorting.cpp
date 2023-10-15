@@ -30,29 +30,29 @@ int main(){
 
     if (choice == 1) {
         //-----------------------------------------------------bubble-------------------------------------------------------------
-        auto start_time_bubble = std::chrono::high_resolution_clock::now();
+        auto start_time_merge = std::chrono::high_resolution_clock::now();
 
-        bubbleSort(arr, n);
+        mergeSort(arr, 0, n - 1);
 
-         auto end_time_bubble = std::chrono::high_resolution_clock::now();
+         auto end_time_merge = std::chrono::high_resolution_clock::now();
 
         std::cout << "Sorted using Bubble Sort: ";
 
-        auto duration_bubble = std::chrono::duration_cast<std::chrono::milliseconds>(end_time_bubble - start_time_bubble);
-	    std::cout << "\n\nTime taken for sorting bubble " << n <<":  " << duration_bubble.count() << " milliseconds" << std::endl;
+        auto duration_merge = std::chrono::duration_cast<std::chrono::milliseconds>(end_time_merge - start_time_merge);
+	    std::cout << "\n\nTime taken for sorting bubble " << n <<":  " << duration_merge.count() << " milliseconds" << std::endl;
 
     } else if (choice == 2) {
         //-----------------------------------------------------insertion--------------------------------------------------------------
-        auto start_time_insertion = std::chrono::high_resolution_clock::now();
+        auto start_time_quick = std::chrono::high_resolution_clock::now();
 
-        insertionSort(arr, n);
+        quickSort(arr, 0, n - 1);
 
-        auto end_time_insertion = std::chrono::high_resolution_clock::now();
+        auto end_time_quick = std::chrono::high_resolution_clock::now();
 
-        std::cout << "Sorted using Insertion Sort: ";
+        std::cout << "Sorted using Quick Sort: ";
 
-        auto duration_insertion = std::chrono::duration_cast<std::chrono::milliseconds>(end_time_insertion - start_time_insertion);
-	    std::cout << "\nTime taken for sorting insertion " << n <<":  " << duration_insertion.count() << " milliseconds" << std::endl;
+        auto duration_quick = std::chrono::duration_cast<std::chrono::milliseconds>(end_time_quick - start_time_quick);
+	    std::cout << "\nTime taken for sorting Quick " << n <<":  " << duration_quick.count() << " milliseconds" << std::endl;
 
     } else if(choice == 3){
         //--------------------------------------------------------selection----------------------------------------------------------
@@ -76,42 +76,24 @@ int main(){
 	return 0;
 }
 
-
-void bubbleSort(std::vector<int> &arr, int n, int i)
+void mergeSort(std::vector<int>& arr, int left, int right)
 {
-	 if (n == 1 || i == n - 1)
-        return;
-
-    if (arr[i] > arr[i + 1]) {
-        swap(arr[i], arr[i + 1]);
-    }
-
-    if (i == n - 2) {
-        bubbleSort(arr, n - 1, 0);
-    } else {
-        bubbleSort(arr, n, i + 1);
+     if (left < right) {
+        int mid = left + (right - left) / 2;
+        mergeSort(arr, left, mid);
+        mergeSort(arr, mid + 1, right);
+        merge(arr, left, mid, right);
     }
 }
 
-
-void insertionSort(std::vector<int> &arr, int n, int i)
+void quickSort(std::vector<int>& arr, int low, int high)
 {
-	if (i == n)
-        return;
-
-    int key = arr[i];
-    int j = i - 1;
-
-    while (j >= 0 && arr[j] > key) {
-        arr[j + 1] = arr[j];
-        j--;
+     if (low < high) {
+        int pi = partition(arr, low, high);
+        quickSort(arr, low, pi - 1);
+        quickSort(arr, pi + 1, high);
     }
-
-    arr[j + 1] = key;
-
-    insertionSort(arr, n, i + 1);
 }
-
 
 void selectionSort(std::vector<int> &arr, int n)
 {
@@ -129,6 +111,67 @@ void selectionSort(std::vector<int> &arr, int n)
         arr[i] = arr[minIndex];
         arr[minIndex] = temp;
     }
+}
+
+void merge(std::vector<int>& arr, int left, int mid, int right)
+{
+    int n1 = mid - left + 1;
+    int n2 = right - mid;
+
+    std::vector<int> L(n1);
+    std::vector<int> R(n2);
+
+    for (int i = 0; i < n1; i++) {
+        L[i] = arr[left + i];
+    }
+
+    for (int j = 0; j < n2; j++) {
+        R[j] = arr[mid + 1 + j];
+    }
+
+    int i = 0;
+    int j = 0;
+    int k = left;
+
+    while (i < n1 && j < n2) {
+        if (L[i] <= R[j]) {
+            arr[k] = L[i];
+            i++;
+        } else {
+            arr[k] = R[j];
+            j++;
+        }
+        k++;
+    }
+
+    while (i < n1) {
+        arr[k] = L[i];
+        i++;
+        k++;
+    }
+
+    while (j < n2) {
+        arr[k] = R[j];
+        j++;
+        k++;
+    }
+
+}
+
+int partition(std::vector<int>& arr, int low, int high)
+{
+    int pivot = arr[high];
+    int i = low - 1;
+
+    for (int j = low; j < high; j++) {
+        if (arr[j] <= pivot) {
+            i++;
+            std::swap(arr[i], arr[j]);
+        }
+    }
+
+    std::swap(arr[i + 1], arr[high]);
+    return i + 1;
 }
 
 void swap(int& a, int& b)
